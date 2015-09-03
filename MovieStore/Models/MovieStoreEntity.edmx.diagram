@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7cad866702b74356b5d457306db91089" Name="Diagram1">
+        <EntityTypeShape EntityType="MovieStoreModel.Category" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Chapter" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Director" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.MovieQuality" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Movy" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.MoviesRelateCategory" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.MovieStatus" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.OrderDetail" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Order" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Setting" Width="1.5" PointX="7.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Transcript" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="MovieStoreModel.FK_MoviesRelateCategories_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_Chapters_Movies" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_OrderDetails_Chapters" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_Movies_Directors" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_Movies_MovieQualities" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_Movies_MovieStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_Movies_Transcripts" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MoviesRelateCategories_Movies" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
