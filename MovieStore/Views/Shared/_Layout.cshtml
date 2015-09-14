@@ -1,16 +1,24 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - iMovie Xem phim HD Online Tốc độ cao</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="css/custom-style.css" rel="stylesheet">
     <link href="css/slider.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/logo-site/imovie-logo.png" />
+    <!-- Start WOWSlider.com HEAD section -->
+    <link rel="stylesheet" type="text/css" href="engine1/style.css" />
+    <script type="text/javascript" src="engine1/jquery.js"></script>
+    <!-- End WOWSlider.com HEAD section -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
     <!-- Add fancyBox -->
     <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
@@ -19,18 +27,35 @@
     <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-buttons.js"></script>
     <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-media.js"></script>
 
+    <script src="js/imovie.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <link href="css/sweetalert.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="container">
         <div id="mynavbar" class="row">
         </div>
     </div>
+
     <div class="container">
         @RenderBody()
-        </div>
-        <footer id="myfooter"></footer>
+    </div>
 
-        <script src="js/slider.js"></script>
 
+
+
+    <footer id="myfooter"></footer>
 </body>
+<script src="js/bootstrap.js"></script>
+<script src="js/slider.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#mynavbar").load("templates/navbar.html");
+        $("#myfooter").load("templates/footer.html");
+
+    });
+</script>
+
 </html>
+
