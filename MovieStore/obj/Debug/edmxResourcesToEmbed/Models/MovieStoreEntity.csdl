@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MovieStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MovieStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="MovieStoreModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="MovieStoreModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="MovieStoreModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="MovieStoreModel.AspNetUser" />
+    <EntitySet Name="Categories" EntityType="MovieStoreModel.Category" />
+    <EntitySet Name="Chapters" EntityType="MovieStoreModel.Chapter" />
+    <EntitySet Name="Directors" EntityType="MovieStoreModel.Director" />
+    <EntitySet Name="MovieQualities" EntityType="MovieStoreModel.MovieQuality" />
+    <EntitySet Name="Movies" EntityType="MovieStoreModel.Movy" />
+    <EntitySet Name="MoviesRelateCategories" EntityType="MovieStoreModel.MoviesRelateCategory" />
+    <EntitySet Name="MovieStatuses" EntityType="MovieStoreModel.MovieStatus" />
+    <EntitySet Name="OrderDetails" EntityType="MovieStoreModel.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="MovieStoreModel.Order" />
+    <EntitySet Name="Settings" EntityType="MovieStoreModel.Setting" />
+    <EntitySet Name="Transcripts" EntityType="MovieStoreModel.Transcript" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MovieStoreModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="MovieStoreModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MoviesRelateCategories_Categories" Association="MovieStoreModel.FK_MoviesRelateCategories_Categories">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="MoviesRelateCategory" EntitySet="MoviesRelateCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chapters_Movies" Association="MovieStoreModel.FK_Chapters_Movies">
+      <End Role="Movy" EntitySet="Movies" />
+      <End Role="Chapter" EntitySet="Chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Chapters" Association="MovieStoreModel.FK_OrderDetails_Chapters">
+      <End Role="Chapter" EntitySet="Chapters" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movies_Directors" Association="MovieStoreModel.FK_Movies_Directors">
+      <End Role="Director" EntitySet="Directors" />
+      <End Role="Movy" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movies_MovieQualities" Association="MovieStoreModel.FK_Movies_MovieQualities">
+      <End Role="MovieQuality" EntitySet="MovieQualities" />
+      <End Role="Movy" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movies_MovieStatuses" Association="MovieStoreModel.FK_Movies_MovieStatuses">
+      <End Role="MovieStatus" EntitySet="MovieStatuses" />
+      <End Role="Movy" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movies_Transcripts" Association="MovieStoreModel.FK_Movies_Transcripts">
+      <End Role="Transcript" EntitySet="Transcripts" />
+      <End Role="Movy" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MoviesRelateCategories_Movies" Association="MovieStoreModel.FK_MoviesRelateCategories_Movies">
+      <End Role="Movy" EntitySet="Movies" />
+      <End Role="MoviesRelateCategory" EntitySet="MoviesRelateCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Orders" Association="MovieStoreModel.FK_OrderDetails_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="MovieStoreModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MovieStoreModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="MovieStoreModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="MovieStoreModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="MovieStoreModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="MovieStoreModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRoles" Relationship="MovieStoreModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MoviesRelateCategories" Relationship="MovieStoreModel.FK_MoviesRelateCategories_Categories" FromRole="Category" ToRole="MoviesRelateCategory" />
+  </EntityType>
+  <EntityType Name="Chapter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChapterName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MovieId" Type="Int32" />
+    <Property Name="Capacity" Type="Int32" />
+    <NavigationProperty Name="Movy" Relationship="MovieStoreModel.FK_Chapters_Movies" FromRole="Chapter" ToRole="Movy" />
+    <NavigationProperty Name="OrderDetails" Relationship="MovieStoreModel.FK_OrderDetails_Chapters" FromRole="Chapter" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="Director">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DirectorName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movies" Relationship="MovieStoreModel.FK_Movies_Directors" FromRole="Director" ToRole="Movy" />
+  </EntityType>
+  <EntityType Name="MovieQuality">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QualityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movies" Relationship="MovieStoreModel.FK_Movies_MovieQualities" FromRole="MovieQuality" ToRole="Movy" />
+  </EntityType>
+  <EntityType Name="Movy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MovieName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProductionYear" Type="DateTime" Precision="0" />
+    <Property Name="Time" Type="Int32" />
+    <Property Name="DirectorId" Type="Int32" />
+    <Property Name="NumberOfChapter" Type="Int32" />
+    <Property Name="MovieQualityId" Type="Int32" />
+    <Property Name="MovieStatusId" Type="Int32" />
+    <Property Name="TranscriptId" Type="Int32" />
+    <Property Name="RateOneStar" Type="Int32" />
+    <Property Name="RateTwoStar" Type="Int32" />
+    <Property Name="RateThreeStar" Type="Int32" />
+    <Property Name="RateFourStar" Type="Int32" />
+    <Property Name="RateFiveStar" Type="Int32" />
+    <Property Name="ImdbScore" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NumberOfViewer" Type="Int32" />
+    <Property Name="SubmitTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Chapters" Relationship="MovieStoreModel.FK_Chapters_Movies" FromRole="Movy" ToRole="Chapter" />
+    <NavigationProperty Name="Director" Relationship="MovieStoreModel.FK_Movies_Directors" FromRole="Movy" ToRole="Director" />
+    <NavigationProperty Name="MovieQuality" Relationship="MovieStoreModel.FK_Movies_MovieQualities" FromRole="Movy" ToRole="MovieQuality" />
+    <NavigationProperty Name="MovieStatus" Relationship="MovieStoreModel.FK_Movies_MovieStatuses" FromRole="Movy" ToRole="MovieStatus" />
+    <NavigationProperty Name="Transcript" Relationship="MovieStoreModel.FK_Movies_Transcripts" FromRole="Movy" ToRole="Transcript" />
+    <NavigationProperty Name="MoviesRelateCategories" Relationship="MovieStoreModel.FK_MoviesRelateCategories_Movies" FromRole="Movy" ToRole="MoviesRelateCategory" />
+  </EntityType>
+  <EntityType Name="MoviesRelateCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MovieId" Type="Int32" />
+    <Property Name="CategoryId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="MovieStoreModel.FK_MoviesRelateCategories_Categories" FromRole="MoviesRelateCategory" ToRole="Category" />
+    <NavigationProperty Name="Movy" Relationship="MovieStoreModel.FK_MoviesRelateCategories_Movies" FromRole="MoviesRelateCategory" ToRole="Movy" />
+  </EntityType>
+  <EntityType Name="MovieStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movies" Relationship="MovieStoreModel.FK_Movies_MovieStatuses" FromRole="MovieStatus" ToRole="Movy" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" />
+    <Property Name="ChapterId" Type="Int32" />
+    <NavigationProperty Name="Chapter" Relationship="MovieStoreModel.FK_OrderDetails_Chapters" FromRole="OrderDetail" ToRole="Chapter" />
+    <NavigationProperty Name="Order" Relationship="MovieStoreModel.FK_OrderDetails_Orders" FromRole="OrderDetail" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="SubmitTime" Type="DateTime" Precision="3" />
+    <Property Name="Fee" Type="Double" />
+    <Property Name="Casher" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderDetails" Relationship="MovieStoreModel.FK_OrderDetails_Orders" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IsOnline" Type="Int32" />
+    <Property Name="PricePerGb" Type="Double" />
+  </EntityType>
+  <EntityType Name="Transcript">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TranscriptName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movies" Relationship="MovieStoreModel.FK_Movies_Transcripts" FromRole="Transcript" ToRole="Movy" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="MovieStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MovieStoreModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="MovieStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MovieStoreModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MoviesRelateCategories_Categories">
+    <End Type="MovieStoreModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.MoviesRelateCategory" Role="MoviesRelateCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MoviesRelateCategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chapters_Movies">
+    <End Type="MovieStoreModel.Movy" Role="Movy" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.Chapter" Role="Chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movy">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chapter">
+        <PropertyRef Name="MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Chapters">
+    <End Type="MovieStoreModel.Chapter" Role="Chapter" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chapter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ChapterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movies_Directors">
+    <End Type="MovieStoreModel.Director" Role="Director" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.Movy" Role="Movy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Director">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movy">
+        <PropertyRef Name="DirectorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movies_MovieQualities">
+    <End Type="MovieStoreModel.MovieQuality" Role="MovieQuality" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.Movy" Role="Movy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MovieQuality">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movy">
+        <PropertyRef Name="MovieQualityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movies_MovieStatuses">
+    <End Type="MovieStoreModel.MovieStatus" Role="MovieStatus" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.Movy" Role="Movy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MovieStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movy">
+        <PropertyRef Name="MovieStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movies_Transcripts">
+    <End Type="MovieStoreModel.Transcript" Role="Transcript" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.Movy" Role="Movy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transcript">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movy">
+        <PropertyRef Name="TranscriptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MoviesRelateCategories_Movies">
+    <End Type="MovieStoreModel.Movy" Role="Movy" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.MoviesRelateCategory" Role="MoviesRelateCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movy">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MoviesRelateCategory">
+        <PropertyRef Name="MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Orders">
+    <End Type="MovieStoreModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="MovieStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="MovieStoreModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="MovieStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+</Schema>
