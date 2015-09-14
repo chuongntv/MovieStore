@@ -267,6 +267,11 @@
     <Content Include="Models\MovieStoreEntity.edmx.diagram">
       <DependentUpon>MovieStoreEntity.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\BondoluoPeek.ttf" />
+    <Content Include="fonts\desktop.ini" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\Not Just Groovy.ttf" />
+    <Content Include="fonts\Steinerlight.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -316,6 +321,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="css\" />
+    <Folder Include="fancybox\" />
+    <Folder Include="images\" />
+    <Folder Include="img\" />
+    <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
