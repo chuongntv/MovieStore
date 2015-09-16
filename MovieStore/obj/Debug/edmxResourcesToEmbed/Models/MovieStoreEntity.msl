@@ -85,6 +85,7 @@
         <MappingFragment StoreEntitySet="Movies">
           <ScalarProperty Name="SubmitTime" ColumnName="SubmitTime" />
           <ScalarProperty Name="NumberOfViewer" ColumnName="NumberOfViewer" />
+          <ScalarProperty Name="MovieTrailer" ColumnName="MovieTrailer" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ImdbScore" ColumnName="ImdbScore" />
           <ScalarProperty Name="RateFiveStar" ColumnName="RateFiveStar" />

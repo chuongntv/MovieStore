@@ -29,7 +29,6 @@ namespace MovieStore.Models
         public Nullable<int> NumberOfChapter { get; set; }
         public Nullable<int> MovieQualityId { get; set; }
         public Nullable<int> MovieStatusId { get; set; }
-        public Nullable<int> TranscriptId { get; set; }
         public Nullable<int> RateOneStar { get; set; }
         public Nullable<int> RateTwoStar { get; set; }
         public Nullable<int> RateThreeStar { get; set; }
@@ -46,7 +45,6 @@ namespace MovieStore.Models
         public virtual Director Director { get; set; }
         public virtual MovieQuality MovieQuality { get; set; }
         public virtual MovieStatus MovieStatus { get; set; }
-        public virtual Transcript Transcript { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MoviesRelateCategory> MoviesRelateCategories { get; set; }
     }

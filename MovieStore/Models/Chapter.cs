@@ -24,8 +24,10 @@ namespace MovieStore.Models
         public string ChapterName { get; set; }
         public Nullable<int> MovieId { get; set; }
         public Nullable<int> Capacity { get; set; }
+        public Nullable<int> TranscriptId { get; set; }
     
         public virtual Movy Movy { get; set; }
+        public virtual Transcript Transcript { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

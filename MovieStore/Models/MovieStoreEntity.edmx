@@ -71,6 +71,7 @@
           <Property Name="ChapterName" Type="nvarchar" MaxLength="250" />
           <Property Name="MovieId" Type="int" />
           <Property Name="Capacity" Type="int" />
+          <Property Name="TranscriptId" Type="int" />
         </EntityType>
         <EntityType Name="Directors">
           <Key>
@@ -98,7 +99,6 @@
           <Property Name="NumberOfChapter" Type="int" />
           <Property Name="MovieQualityId" Type="int" />
           <Property Name="MovieStatusId" Type="int" />
-          <Property Name="TranscriptId" Type="int" />
           <Property Name="RateOneStar" Type="int" />
           <Property Name="RateTwoStar" Type="int" />
           <Property Name="RateThreeStar" Type="int" />
@@ -153,6 +153,16 @@
           <Property Name="IsOnline" Type="int" />
           <Property Name="PricePerGb" Type="float" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Transcripts">
           <Key>
             <PropertyRef Name="Id" />
@@ -169,6 +179,18 @@
             </Principal>
             <Dependent Role="Chapters">
               <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chapters_Transcripts">
+          <End Role="Transcripts" Type="Self.Transcripts" Multiplicity="0..1" />
+          <End Role="Chapters" Type="Self.Chapters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transcripts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chapters">
+              <PropertyRef Name="TranscriptId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -264,18 +286,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Movies_Transcripts">
-          <End Role="Transcripts" Type="Self.Transcripts" Multiplicity="0..1" />
-          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transcripts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Movies">
-              <PropertyRef Name="TranscriptId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MoviesRelateCategories_Categories">
           <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
           <End Role="MoviesRelateCategories" Type="Self.MoviesRelateCategories" Multiplicity="*" />
@@ -340,9 +350,14 @@
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transcripts" EntityType="Self.Transcripts" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Chapters_Movies" Association="Self.FK_Chapters_Movies">
             <End Role="Movies" EntitySet="Movies" />
+            <End Role="Chapters" EntitySet="Chapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chapters_Transcripts" Association="Self.FK_Chapters_Transcripts">
+            <End Role="Transcripts" EntitySet="Transcripts" />
             <End Role="Chapters" EntitySet="Chapters" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -371,10 +386,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Movies_MovieStatuses" Association="Self.FK_Movies_MovieStatuses">
             <End Role="MovieStatuses" EntitySet="MovieStatuses" />
-            <End Role="Movies" EntitySet="Movies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movies_Transcripts" Association="Self.FK_Movies_Transcripts">
-            <End Role="Transcripts" EntitySet="Transcripts" />
             <End Role="Movies" EntitySet="Movies" />
           </AssociationSet>
           <AssociationSet Name="FK_MoviesRelateCategories_Categories" Association="Self.FK_MoviesRelateCategories_Categories">
@@ -413,6 +424,7 @@
           <EntitySet Name="OrderDetails" EntityType="MovieStoreModel.OrderDetail" />
           <EntitySet Name="Orders" EntityType="MovieStoreModel.Order" />
           <EntitySet Name="Settings" EntityType="MovieStoreModel.Setting" />
+          <EntitySet Name="sysdiagrams" EntityType="MovieStoreModel.sysdiagram" />
           <EntitySet Name="Transcripts" EntityType="MovieStoreModel.Transcript" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MovieStoreModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -430,6 +442,10 @@
             <End Role="Movy" EntitySet="Movies" />
             <End Role="Chapter" EntitySet="Chapters" />
           </AssociationSet>
+          <AssociationSet Name="FK_Chapters_Transcripts" Association="MovieStoreModel.FK_Chapters_Transcripts">
+            <End Role="Transcript" EntitySet="Transcripts" />
+            <End Role="Chapter" EntitySet="Chapters" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Chapters" Association="MovieStoreModel.FK_OrderDetails_Chapters">
             <End Role="Chapter" EntitySet="Chapters" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
@@ -444,10 +460,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Movies_MovieStatuses" Association="MovieStoreModel.FK_Movies_MovieStatuses">
             <End Role="MovieStatus" EntitySet="MovieStatuses" />
-            <End Role="Movy" EntitySet="Movies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movies_Transcripts" Association="MovieStoreModel.FK_Movies_Transcripts">
-            <End Role="Transcript" EntitySet="Transcripts" />
             <End Role="Movy" EntitySet="Movies" />
           </AssociationSet>
           <AssociationSet Name="FK_MoviesRelateCategories_Movies" Association="MovieStoreModel.FK_MoviesRelateCategories_Movies">
@@ -528,7 +540,9 @@
           <Property Name="ChapterName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="MovieId" Type="Int32" />
           <Property Name="Capacity" Type="Int32" />
+          <Property Name="TranscriptId" Type="Int32" />
           <NavigationProperty Name="Movy" Relationship="MovieStoreModel.FK_Chapters_Movies" FromRole="Chapter" ToRole="Movy" />
+          <NavigationProperty Name="Transcript" Relationship="MovieStoreModel.FK_Chapters_Transcripts" FromRole="Chapter" ToRole="Transcript" />
           <NavigationProperty Name="OrderDetails" Relationship="MovieStoreModel.FK_OrderDetails_Chapters" FromRole="Chapter" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="Director">
@@ -559,7 +573,6 @@
           <Property Name="NumberOfChapter" Type="Int32" />
           <Property Name="MovieQualityId" Type="Int32" />
           <Property Name="MovieStatusId" Type="Int32" />
-          <Property Name="TranscriptId" Type="Int32" />
           <Property Name="RateOneStar" Type="Int32" />
           <Property Name="RateTwoStar" Type="Int32" />
           <Property Name="RateThreeStar" Type="Int32" />
@@ -574,7 +587,6 @@
           <NavigationProperty Name="Director" Relationship="MovieStoreModel.FK_Movies_Directors" FromRole="Movy" ToRole="Director" />
           <NavigationProperty Name="MovieQuality" Relationship="MovieStoreModel.FK_Movies_MovieQualities" FromRole="Movy" ToRole="MovieQuality" />
           <NavigationProperty Name="MovieStatus" Relationship="MovieStoreModel.FK_Movies_MovieStatuses" FromRole="Movy" ToRole="MovieStatus" />
-          <NavigationProperty Name="Transcript" Relationship="MovieStoreModel.FK_Movies_Transcripts" FromRole="Movy" ToRole="Transcript" />
           <NavigationProperty Name="MoviesRelateCategories" Relationship="MovieStoreModel.FK_MoviesRelateCategories_Movies" FromRole="Movy" ToRole="MoviesRelateCategory" />
         </EntityType>
         <EntityType Name="MoviesRelateCategory">
@@ -626,13 +638,23 @@
           <Property Name="IsOnline" Type="Int32" />
           <Property Name="PricePerGb" Type="Double" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Transcript">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TranscriptName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Movies" Relationship="MovieStoreModel.FK_Movies_Transcripts" FromRole="Transcript" ToRole="Movy" />
+          <NavigationProperty Name="Chapters" Relationship="MovieStoreModel.FK_Chapters_Transcripts" FromRole="Transcript" ToRole="Chapter" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="MovieStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -686,6 +708,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Chapters_Transcripts">
+          <End Type="MovieStoreModel.Transcript" Role="Transcript" Multiplicity="0..1" />
+          <End Type="MovieStoreModel.Chapter" Role="Chapter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transcript">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chapter">
+              <PropertyRef Name="TranscriptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderDetails_Chapters">
           <End Type="MovieStoreModel.Chapter" Role="Chapter" Multiplicity="0..1" />
           <End Type="MovieStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
@@ -731,18 +765,6 @@
             </Principal>
             <Dependent Role="Movy">
               <PropertyRef Name="MovieStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Movies_Transcripts">
-          <End Type="MovieStoreModel.Transcript" Role="Transcript" Multiplicity="0..1" />
-          <End Type="MovieStoreModel.Movy" Role="Movy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transcript">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Movy">
-              <PropertyRef Name="TranscriptId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -836,6 +858,7 @@
           <EntitySetMapping Name="Chapters">
             <EntityTypeMapping TypeName="MovieStoreModel.Chapter">
               <MappingFragment StoreEntitySet="Chapters">
+                <ScalarProperty Name="TranscriptId" ColumnName="TranscriptId" />
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
                 <ScalarProperty Name="ChapterName" ColumnName="ChapterName" />
@@ -872,7 +895,6 @@
                 <ScalarProperty Name="RateThreeStar" ColumnName="RateThreeStar" />
                 <ScalarProperty Name="RateTwoStar" ColumnName="RateTwoStar" />
                 <ScalarProperty Name="RateOneStar" ColumnName="RateOneStar" />
-                <ScalarProperty Name="TranscriptId" ColumnName="TranscriptId" />
                 <ScalarProperty Name="MovieStatusId" ColumnName="MovieStatusId" />
                 <ScalarProperty Name="MovieQualityId" ColumnName="MovieQualityId" />
                 <ScalarProperty Name="NumberOfChapter" ColumnName="NumberOfChapter" />
@@ -929,6 +951,17 @@
                 <ScalarProperty Name="PricePerGb" ColumnName="PricePerGb" />
                 <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MovieStoreModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

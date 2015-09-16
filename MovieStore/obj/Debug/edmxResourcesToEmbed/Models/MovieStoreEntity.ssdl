@@ -101,6 +101,7 @@
     <Property Name="RateFiveStar" Type="int" />
     <Property Name="ImdbScore" Type="int" />
     <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="MovieTrailer" Type="nvarchar(max)" />
     <Property Name="NumberOfViewer" Type="int" />
     <Property Name="SubmitTime" Type="datetime" />
   </EntityType>

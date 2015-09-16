@@ -39,6 +39,7 @@ namespace MovieStore.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Transcript> Transcripts { get; set; }
     }
 }
