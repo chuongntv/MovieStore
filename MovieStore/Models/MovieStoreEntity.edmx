@@ -106,6 +106,7 @@
           <Property Name="RateFiveStar" Type="int" />
           <Property Name="ImdbScore" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="MovieTrailer" Type="nvarchar(max)" />
           <Property Name="NumberOfViewer" Type="int" />
           <Property Name="SubmitTime" Type="datetime" />
         </EntityType>
@@ -566,6 +567,7 @@
           <Property Name="RateFiveStar" Type="Int32" />
           <Property Name="ImdbScore" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MovieTrailer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfViewer" Type="Int32" />
           <Property Name="SubmitTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Chapters" Relationship="MovieStoreModel.FK_Chapters_Movies" FromRole="Movy" ToRole="Chapter" />
@@ -862,6 +864,7 @@
               <MappingFragment StoreEntitySet="Movies">
                 <ScalarProperty Name="SubmitTime" ColumnName="SubmitTime" />
                 <ScalarProperty Name="NumberOfViewer" ColumnName="NumberOfViewer" />
+                <ScalarProperty Name="MovieTrailer" ColumnName="MovieTrailer" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ImdbScore" ColumnName="ImdbScore" />
                 <ScalarProperty Name="RateFiveStar" ColumnName="RateFiveStar" />

@@ -6,20 +6,20 @@
     <edmx:Diagrams>
       <Diagram DiagramId="7cad866702b74356b5d457306db91089" Name="Diagram1">
         <EntityTypeShape EntityType="MovieStoreModel.AspNetRole" Width="1.5" PointX="7.75" PointY="10.5" />
-        <EntityTypeShape EntityType="MovieStoreModel.AspNetUserClaim" Width="1.5" PointX="12.25" PointY="9" />
-        <EntityTypeShape EntityType="MovieStoreModel.AspNetUserLogin" Width="1.5" PointX="12.25" PointY="11.75" />
+        <EntityTypeShape EntityType="MovieStoreModel.AspNetUserClaim" Width="1.5" PointX="12.25" PointY="11.625" />
+        <EntityTypeShape EntityType="MovieStoreModel.AspNetUserLogin" Width="1.5" PointX="12.25" PointY="9" />
         <EntityTypeShape EntityType="MovieStoreModel.AspNetUser" Width="1.5" PointX="10" PointY="9.375" />
-        <EntityTypeShape EntityType="MovieStoreModel.Category" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="MovieStoreModel.Category" Width="1.5" PointX="3" PointY="8.25" />
         <EntityTypeShape EntityType="MovieStoreModel.Chapter" Width="1.5" PointX="5.25" PointY="5.625" />
-        <EntityTypeShape EntityType="MovieStoreModel.Director" Width="1.5" PointX="0.75" PointY="8.5" />
-        <EntityTypeShape EntityType="MovieStoreModel.MovieQuality" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MovieStoreModel.Director" Width="1.5" PointX="0.75" PointY="8.625" />
+        <EntityTypeShape EntityType="MovieStoreModel.MovieQuality" Width="1.5" PointX="0.75" PointY="6.25" />
         <EntityTypeShape EntityType="MovieStoreModel.Movy" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="MovieStoreModel.MoviesRelateCategory" Width="1.5" PointX="5.25" PointY="1.875" />
-        <EntityTypeShape EntityType="MovieStoreModel.MovieStatus" Width="1.5" PointX="0.75" PointY="6.125" />
-        <EntityTypeShape EntityType="MovieStoreModel.OrderDetail" Width="1.5" PointX="7.5" PointY="5.625" />
-        <EntityTypeShape EntityType="MovieStoreModel.Order" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="MovieStoreModel.MoviesRelateCategory" Width="1.5" PointX="5.25" PointY="2" />
+        <EntityTypeShape EntityType="MovieStoreModel.MovieStatus" Width="1.5" PointX="0.75" PointY="3.25" />
+        <EntityTypeShape EntityType="MovieStoreModel.OrderDetail" Width="1.5" PointX="7.5" PointY="5.75" />
+        <EntityTypeShape EntityType="MovieStoreModel.Order" Width="1.5" PointX="5.25" PointY="9.5" />
         <EntityTypeShape EntityType="MovieStoreModel.Setting" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MovieStoreModel.Transcript" Width="1.5" PointX="0.75" PointY="3.125" />
+        <EntityTypeShape EntityType="MovieStoreModel.Transcript" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="MovieStoreModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="MovieStoreModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="MovieStoreModel.FK_MoviesRelateCategories_Categories" />

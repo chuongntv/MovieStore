@@ -37,6 +37,7 @@ namespace MovieStore.Models
         public Nullable<int> RateFiveStar { get; set; }
         public Nullable<int> ImdbScore { get; set; }
         public string Description { get; set; }
+        public string MovieTrailer { get; set; }
         public Nullable<int> NumberOfViewer { get; set; }
         public Nullable<System.DateTime> SubmitTime { get; set; }
     
