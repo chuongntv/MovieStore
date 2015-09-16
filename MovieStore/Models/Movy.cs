@@ -39,6 +39,7 @@ namespace MovieStore.Models
         public string MovieTrailer { get; set; }
         public Nullable<int> NumberOfViewer { get; set; }
         public Nullable<System.DateTime> SubmitTime { get; set; }
+        public string MovieImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chapter> Chapters { get; set; }
